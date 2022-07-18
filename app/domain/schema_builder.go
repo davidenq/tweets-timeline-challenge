@@ -20,7 +20,7 @@ func (s *schema) get(entityName EntityName) *schema {
 	case Profile:
 		s.entity = &schemas.ProfileSchema{}
 	case Tweets:
-		s.entity = &schemas.TweetsSchema{}
+		s.entity = &schemas.TimelinesSchema{}
 	case User:
 		s.entity = &schemas.UserSchema{}
 	default:

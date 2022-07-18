@@ -41,7 +41,7 @@ func TestGetSchema(t *testing.T) {
 		{
 			description:    "should return a schema with empty tweets schema and nil error",
 			EntityName:     Tweets,
-			expectedEntity: &schemas.TweetsSchema{},
+			expectedEntity: &schemas.TimelinesSchema{},
 		},
 		{
 			description:    "should return a schema with empty user schema and nil error",
