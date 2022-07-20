@@ -3,10 +3,10 @@ package domain
 type EntityName string
 
 const (
-	OAuth   EntityName = "oauth"
-	Profile EntityName = "profile"
-	Tweets  EntityName = "tweets"
-	User    EntityName = "user"
+	OAuth     EntityName = "oauth"
+	Profile   EntityName = "profile"
+	Timelines EntityName = "timelines"
+	User      EntityName = "user"
 )
 
 const (
