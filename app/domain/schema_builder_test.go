@@ -34,13 +34,8 @@ func TestGetSchema(t *testing.T) {
 			expectedEntity: &schemas.OAuthSchema{},
 		},
 		{
-			description:    "should return a schema with empty profile schema and nil error",
-			EntityName:     Profile,
-			expectedEntity: &schemas.ProfileSchema{},
-		},
-		{
-			description:    "should return a schema with empty tweets schema and nil error",
-			EntityName:     Tweets,
+			description:    "should return a schema with empty Timelines schema and nil error",
+			EntityName:     Timelines,
 			expectedEntity: &schemas.TimelinesSchema{},
 		},
 		{
@@ -58,9 +53,9 @@ func TestGetSchema(t *testing.T) {
 	}
 	for _, test := range tests {
 		t.Run(test.description, func(t *testing.T) {
-			schema := &schema{}
-			actualEntity := schema.get(test.EntityName)
-			assert.Equal(t, test.expectedEntity, actualEntity.entity)
+			schema := &Schema{}
+			actualEntity := schema.Get(test.EntityName)
+			assert.Equal(t, test.expectedEntity, actualEntity.Entity)
 			assert.Equal(t, test.expectedError, actualEntity.err != nil)
 		})
 	}
@@ -105,9 +100,9 @@ func TestFillSchema(t *testing.T) {
 	}
 	for _, test := range tests {
 		t.Run(test.description, func(t *testing.T) {
-			s := schema{}
-			actualEntity := s.get(test.EntityName).fill(test.data)
-			assert.Equal(t, test.expectedEntity, actualEntity.entity)
+			s := Schema{}
+			actualEntity := s.Get(test.EntityName).Fill(test.data)
+			assert.Equal(t, test.expectedEntity, actualEntity.Entity)
 			assert.Equal(t, test.expectedError, actualEntity.err != nil)
 		})
 	}
@@ -147,13 +142,13 @@ func TestValidateSchema(t *testing.T) {
 	}
 	for _, test := range tests {
 		t.Run(test.description, func(t *testing.T) {
-			s := schema{}
-			actualEntity := s.get(test.EntityName).fill(test.data)
+			s := Schema{}
+			actualEntity := s.Get(test.EntityName).Fill(test.data)
 			if test.check {
-				actualEntity.validate()
+				actualEntity.Validate()
 			}
 
-			assert.Equal(t, test.expectedEntity, actualEntity.entity)
+			assert.Equal(t, test.expectedEntity, actualEntity.Entity)
 			assert.Equal(t, test.expectedError, actualEntity.err != nil)
 		})
 	}
