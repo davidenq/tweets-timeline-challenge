@@ -34,5 +34,7 @@ build-app-in-docker:
 run-app-in-docker:
 	@ docker run -dti -p $(API_PORT):$(API_PORT) --env-file ./$(ENV).env --name tweets-timeline $(ECR_URI)
 
-start:
+start-web:
+	@ ENV=$(ENV) npm run --prefix ./web dev
+start-app:
 	@  ENV=$(ENV) go run ./main.go
