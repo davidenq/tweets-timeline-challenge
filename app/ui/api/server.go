@@ -9,7 +9,7 @@ import (
 	"github.com/gofiber/swagger"
 )
 
-func NewServer(handlers handlers.HandlerDefinition) {
+func NewServer(port string, handlers handlers.HandlerDefinition) {
 	app := fiber.New()
 	app.Use(recover.New())
 	app.Use(logger.New())
@@ -21,5 +21,5 @@ func NewServer(handlers handlers.HandlerDefinition) {
 	apiV1.Get("/users/:username", handlers.GetUserByUsername)
 	apiV1.Put("/users/:username", handlers.UpdateUserByUsername)
 
-	app.Listen(":3000")
+	app.Listen(":" + port)
 }

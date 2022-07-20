@@ -48,5 +48,5 @@ func (a *App) LoadAPI() *App {
 }
 func (a *App) Init() {
 	log.Logger = log.With().Caller().Logger()
-	api.NewServer(a.handlers)
+	api.NewServer(a.config.APIPort, a.handlers)
 }

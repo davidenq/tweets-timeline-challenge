@@ -7,7 +7,8 @@ import (
 )
 
 type Config struct {
-	ENV string `env:"ENV"`
+	ENV     string `env:"ENV"`
+	APIPort string `env:"API_PORT"`
 
 	DynamoDBDomain string `env:"DYNAMODB_DOMAIN"`
 	DynamoDBPort   string `env:"DYNAMODB_PORT"`
