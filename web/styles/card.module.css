@@ -1,0 +1,47 @@
+.containerCard {
+  padding: 10px 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.containerPhotoTimeline {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid gray;
+  padding: 10px;
+  width: 250px;
+}
+
+.containerImg {
+  background: white;
+}
+
+.containerDescription h6 {
+  font-size: 10px;
+  font-weight: 300;
+}
+
+.containerTweet {
+  padding: 10px;
+  border: 1px solid gray;
+  margin: 5px;
+  border-radius: 10px;
+}
+
+.containerNameDescription {
+  display: flex;
+  flex-direction: column;
+}
+
+.containerDescription {
+  background: white;
+}
+
+.containerTimeline {
+  background: white;
+}
+
+.containerNameDescription span {
+  font-size: 16px;
+  font-weight: bold;
+}
