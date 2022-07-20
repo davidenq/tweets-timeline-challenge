@@ -27,7 +27,7 @@ func generateToken(cfg config.Config) {
 		log.Error().Msg(err.Error())
 		panic(err)
 	}
-	log.Info().Msg("access token to connect with twitter has been requested successful!")
+	log.Info().Msg("access token to connect with twitter has been requested and stored successful!")
 }
 
 func runMigration(cfg config.Config) {
