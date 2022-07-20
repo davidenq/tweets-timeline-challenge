@@ -1,4 +1,9 @@
 bin/*
 bundles/*
 .vscode
-.env
+mocks_*
+mock_*
+mocks/
+deployments/docker-compose/storage
+docs/api/*
+*.env
