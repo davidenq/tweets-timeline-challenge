@@ -3,6 +3,7 @@ package usecases
 import (
 	"reflect"
 	"strings"
+	"time"
 
 	"github.com/davidenq/tweets-timeline-challenge/app/domain"
 	"github.com/rs/zerolog/log"
@@ -38,6 +39,7 @@ func (m MigrateUsecase) CreateTables() error {
 		log.Error().Stack().Err(err).Msg("")
 		return err
 	}
+	time.Sleep(2 * time.Second)
 	return nil
 }
 
