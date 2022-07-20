@@ -1,12 +1,15 @@
 name: api-continuous-deployment
 on:
   workflow_run:
-    workflows: ["api-continuous-integration"]
-    branches: [develop]
+    workflows:
+      - api-continuous-integration
+    branches:
+      - develop
     types:
       - completed
     paths:
-      - "app/**"
+      - app/**
+      - .github?**
 jobs:
   build-push:
     name: Build Image and Push into ECR
