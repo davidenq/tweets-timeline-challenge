@@ -1,0 +1,41 @@
+name: api-continuous-deployment
+on:
+  workflow_run:
+    workflows: ["api-continuous-integration"]
+    branches: [develop]
+    types:
+      - completed
+    paths:
+      - "app/**"
+jobs:
+  build-push:
+    name: Build Image and Push into ECR
+    runs-on: ubuntu-latest
+    env:
+      ENV: local
+      API_PORT: 8080
+      TWITTER_API_KEY: ${{secrets.TWITTER_API_KEY}}
+      TWITTER_API_SECRET_KEY: ${{secrets.TWITTER_API_SECRET_KEY}}
+      TWITTER_OAUTH_URL: ${{secrets.TWITTER_OAUTH_URL}}
+      TWITTER_USERS_URL: ${{secrets.TWITTER_USERS_URL}}
+      DYNAMODB_DOMAIN: ${{secrets.DYNAMODB_DOMAIN}}
+      DYNAMODB_PORT: ${{secrets.DYNAMODB_PORT}}
+      AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+      AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+      AWS_DEFAULT_REGION: ${{secrets.AWS_DEFAULT_REGION}}
+      ECR_URI: ${{secrets.ECR_URI}}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{secrets.AWS_DEFAULT_REGION}}
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1
+      - name: Build, tag, and push image to Amazon ECR
+        run: |
+          make build-app-in-docker
+          make publish-docker-app-on-ecr

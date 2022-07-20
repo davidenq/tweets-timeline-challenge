@@ -40,3 +40,9 @@ start-web:
 	@ ENV=$(ENV) npm run --prefix ./web dev
 start-app:
 	@  ENV=$(ENV) go run ./main.go
+
+aws-ecr-login:
+	@ aws ecr get-login-password --region $(AWS_DEFAULT_REGION) --profile $(AWS_PROFILE) | docker login --username AWS --password-stdin $(ECR_URI)
+
+publish-docker-app-on-ecr:
+	@ docker push $(ECR_URI)
