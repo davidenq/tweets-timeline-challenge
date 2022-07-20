@@ -1,0 +1,81 @@
+name: ci
+on:
+  push:
+    branches:
+      - "develop"
+    paths:
+      - "app/**"
+jobs:
+  unit-tests:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    env:
+      ENV: local
+      API_PORT: 8080
+      TWITTER_API_KEY: ${{secrets.TWITTER_API_KEY}}
+      TWITTER_API_SECRET_KEY: ${{secrets.TWITTER_API_SECRET_KEY}}
+      TWITTER_OAUTH_URL: ${{secrets.TWITTER_OAUTH_URL}}
+      TWITTER_USERS_URL: ${{secrets.TWITTER_USERS_URL}}
+      DYNAMODB_DOMAIN: ${{secrets.DYNAMODB_DOMAIN}}
+      DYNAMODB_PORT: ${{secrets.DYNAMODB_PORT}}
+      AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+      AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+      AWS_DEFAULT_REGION: ${{secrets.AWS_DEFAULT_REGION}}
+      ECR_URI: ${{secrets.ECR_URI}}
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+      - name: Setup golang
+        uses: actions/setup-go@v3
+      - name: Creating mocks
+        run: make create-mocks
+      - name: Running unit tests
+        run: make unit-tests
+  integration-tests:
+    name: Integration tests
+    runs-on: ubuntu-latest
+    env:
+      ENV: local
+      API_PORT: 8080
+      TWITTER_API_KEY: ${{secrets.TWITTER_API_KEY}}
+      TWITTER_API_SECRET_KEY: ${{secrets.TWITTER_API_SECRET_KEY}}
+      TWITTER_OAUTH_URL: ${{secrets.TWITTER_OAUTH_URL}}
+      TWITTER_USERS_URL: ${{secrets.TWITTER_USERS_URL}}
+      DYNAMODB_DOMAIN: ${{secrets.DYNAMODB_DOMAIN}}
+      DYNAMODB_PORT: ${{secrets.DYNAMODB_PORT}}
+      AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+      AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+      AWS_DEFAULT_REGION: ${{secrets.AWS_DEFAULT_REGION}}
+      ECR_URI: ${{secrets.ECR_URI}}
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+      - name: Setup golang
+        uses: actions/setup-go@v3
+      - name: Creating mocks
+        run: make create-mocks
+      - name: Running unit tests
+        run: make unit-tests
+  end2end-tests:
+    name: End to end tests
+    runs-on: ubuntu-latest
+    env:
+      ENV: local
+      API_PORT: 8080
+      TWITTER_API_KEY: ${{secrets.TWITTER_API_KEY}}
+      TWITTER_API_SECRET_KEY: ${{secrets.TWITTER_API_SECRET_KEY}}
+      TWITTER_OAUTH_URL: ${{secrets.TWITTER_OAUTH_URL}}
+      TWITTER_USERS_URL: ${{secrets.TWITTER_USERS_URL}}
+      DYNAMODB_DOMAIN: ${{secrets.DYNAMODB_DOMAIN}}
+      DYNAMODB_PORT: ${{secrets.DYNAMODB_PORT}}
+      AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+      AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+      AWS_DEFAULT_REGION: ${{secrets.AWS_DEFAULT_REGION}}
+      ECR_URI: ${{secrets.ECR_URI}}
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+      - name: Setup golang
+        uses: actions/setup-go@v3
+      - name: Running end to end tests
+        run: make end2end-tests
