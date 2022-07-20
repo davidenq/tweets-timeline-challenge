@@ -27,6 +27,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup golang
         uses: actions/setup-go@v3
+        with:
+          go-version: ">=1.18.0"
       - name: Install dependencies
         run: go install github.com/vektra/mockery/v2@latest
       - name: Creating mocks
@@ -54,8 +56,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup golang
         uses: actions/setup-go@v3
-      - name: Creating mocks
-        run: make create-mocks
+        with:
+          go-version: ">=1.18.0"
       - name: Running integration tests
         run: make integration-tests
   end2end-tests:
