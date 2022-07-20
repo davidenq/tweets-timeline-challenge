@@ -1,4 +1,5 @@
-
+.ONESHELL:
+SHELL=/bin/bash
 -include $(PWD)/$(ENV).env
 export
 
@@ -20,7 +21,8 @@ start-dynamo:
 	@ sudo chmod 777 -R $(shell pwd)/deployments/docker-compose/storage
 
 swagger:
-	@ swag init --output ./docs/api
+	@ sh ./scripts/replace.sh
+	@ echo swag init --output ./docs/api
 
 prepare-app:
 	@ ENV=$(ENV) go run ./app/ui/cli/cmd.go
