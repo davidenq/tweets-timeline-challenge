@@ -62,7 +62,7 @@ func TestSaveOAuthSchemaInDBMock(t *testing.T) {
 		t.Run(test.description, func(t *testing.T) {
 
 			httpClient := &mocks.HttpClientDrivenPort{}
-			dbClient := &mocks.DBDrivenPort{}
+			dbClient := &mocks.RepositoryDrivenPort{}
 			config := config.Config{}
 			oauthUsecase := NewOAuth(config, httpClient, dbClient)
 			var oauthMap map[string]interface{}
