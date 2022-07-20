@@ -10,9 +10,6 @@ type Config struct {
 	ENV     string `env:"ENV"`
 	APIPort string `env:"API_PORT"`
 
-	DynamoDBDomain string `env:"DYNAMODB_DOMAIN"`
-	DynamoDBPort   string `env:"DYNAMODB_PORT"`
-
 	AWSAccessKeyID     string `env:"AWS_ACCESS_KEY_ID"`
 	AWSSecretAccessKey string `env:"AWS_SECRET_ACCESS_KEY"`
 	AWSDefaultRegion   string `env:"AWS_DEFAULT_REGION"`
