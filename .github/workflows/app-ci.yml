@@ -5,7 +5,7 @@ on:
       - develop
     paths:
       - app/**
-      - .github?**
+      - .github/**
 jobs:
   unit-tests:
     name: Unit tests

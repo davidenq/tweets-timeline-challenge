@@ -3,13 +3,8 @@ on:
   workflow_run:
     workflows:
       - api-continuous-integration
-    branches:
-      - develop
     types:
       - completed
-    paths:
-      - app/**
-      - .github?**
 jobs:
   build-push:
     name: Build Image and Push into ECR
