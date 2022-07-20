@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
-	"github.com/davidenq/tweets-timeline-challenge/app/domain"
 	"github.com/davidenq/tweets-timeline-challenge/app/domain/usecases"
 	"github.com/rs/zerolog/log"
 )
@@ -110,28 +109,27 @@ func (d DynamoService) CreateTables(schema interface{}) error {
 		},
 	}
 	_, err := d.client.CreateTable(context.Background(), params)
-
 	if err != nil {
 		log.Error().Msg(err.Error())
 		panic(err)
 	}
 	log.Info().Msg("table " + schematt.TableName + " has been created")
-	time.Sleep(2000000000)
-	if schematt.TableName == string(domain.OAuth) {
-		ttlInput := &dynamodb.UpdateTimeToLiveInput{
-			TableName: aws.String(schematt.TableName),
-			TimeToLiveSpecification: &types.TimeToLiveSpecification{
-				AttributeName: aws.String("expires_on"),
-				Enabled:       aws.Bool(true),
-			},
-		}
-		_, err = d.client.UpdateTimeToLive(context.Background(), ttlInput)
-		if err != nil {
-			log.Error().Msg(err.Error())
-			panic(err)
-		}
-		log.Info().Msg("table " + schematt.TableName + " has been updated")
-	}
+	time.Sleep(5 * time.Second)
+	//if schematt.TableName == string(domain.OAuth) {
+	//	ttlInput := &dynamodb.UpdateTimeToLiveInput{
+	//		TableName: aws.String(schematt.TableName),
+	//		TimeToLiveSpecification: &types.TimeToLiveSpecification{
+	//			AttributeName: aws.String("expires_on"),
+	//			Enabled:       aws.Bool(true),
+	//		},
+	//	}
+	//	_, err = d.client.UpdateTimeToLive(context.Background(), ttlInput)
+	//	if err != nil {
+	//		log.Error().Msg(err.Error())
+	//		panic(err)
+	//	}
+	//	log.Info().Msg("table " + schematt.TableName + " has been updated")
+	//}
 
 	return nil
 }

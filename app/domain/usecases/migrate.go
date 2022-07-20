@@ -25,15 +25,13 @@ type MigrateUsecase struct {
 }
 
 func (m MigrateUsecase) CreateTables() error {
-	//remove tables before to test
-	m.repository.RemoveTables()
-	oauthMigration := SchemaToTable{}
+	oauthMigration := &SchemaToTable{}
 	err := m.repository.CreateTables(*oauthMigration.generateTableDefinition(domain.OAuth))
 	if err != nil {
 		log.Error().Stack().Err(err).Msg("")
 		return err
 	}
-	userMigration := SchemaToTable{}
+	userMigration := &SchemaToTable{}
 	err = m.repository.CreateTables(*userMigration.generateTableDefinition((domain.User)))
 	if err != nil {
 		log.Error().Stack().Err(err).Msg("")
