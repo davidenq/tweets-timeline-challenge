@@ -6,8 +6,32 @@ This project has been developed to complete a challenge, nevertheless, it has be
 
 On the other hand, there are different kinds of tasks that this project can do such as building docker images, starting services using docker-compose, building binaries, deploying on Fargate using AWS copilot, and so on. So for that reason, there are different dependencies required by each task. But also, it's important to highlight that to execute any task, `make` command is used through a `Makefile` file. This is the entry point to centralize all commands not only to test locally each task but also, to use in github actions workflows in order to avoid  duplication of tasks through scripting (check `.github/workflows/app-ci-cd.yml`). But not only is useful to avoid duplication, but also it is useful because when github actions workflows are broken for some unexpected reason, but you can also test locally what happens with the process and solve it with ease.
 
+__Requirements and additional features__
+- [X] Get Profile Information - Pull all the information from the database
+- [X] Get Latest N Tweets for Profile
+- [ ] Modify Profile Information
+- [ ] Get Profile Request endpoint
+- [X] Hexagonal Architecture
+- [X] Unit tests
+- [X] Integration tests
+- [X] DynamoDB integration
+- [X] Twitter integration
+- [X] Docker to package the API and Web
+- [X] docker-compose for deploy DynamoDB locally
+- [X] Deploy on AWS Fargate using AWS Copilot
+- [X] Swagger documentation
+- [x] API Rest level 2
+- [X] CI implementation with Github Actions
+  - [X] Pipelines to test [unit, integration]
+  - [X] Pipelines to build and push Docker on ECR
+- [ ] End to end tests
+- [ ] CD implementation with Github Actions
+
+## Table of content
+
 - [Tweets Timeline Challenge](#tweets-timeline-challenge)
     - [Important](#important)
+  - [Table of content](#table-of-content)
   - [How to start](#how-to-start)
     - [Requirements](#requirements)
       - [general](#general)
