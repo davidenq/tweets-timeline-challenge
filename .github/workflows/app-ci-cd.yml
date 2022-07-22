@@ -91,14 +91,6 @@ jobs:
     needs: end2end-tests
     runs-on: ubuntu-latest
     env:
-      ENV: local
-      API_PORT: 8080
-      TWITTER_API_KEY: ${{secrets.TWITTER_API_KEY}}
-      TWITTER_API_SECRET_KEY: ${{secrets.TWITTER_API_SECRET_KEY}}
-      TWITTER_OAUTH_URL: ${{secrets.TWITTER_OAUTH_URL}}
-      TWITTER_USERS_URL: ${{secrets.TWITTER_USERS_URL}}
-      DYNAMODB_DOMAIN: ${{secrets.DYNAMODB_DOMAIN}}
-      DYNAMODB_PORT: ${{secrets.DYNAMODB_PORT}}
       AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
       AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       AWS_DEFAULT_REGION: ${{secrets.AWS_DEFAULT_REGION}}
