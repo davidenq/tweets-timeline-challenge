@@ -16,4 +16,5 @@ FROM golang:1.18-alpine AS tweets-timeline
 WORKDIR /tweets-timeline-challenge
 COPY --from=build /tweets-timeline-challenge/tweets-timeline tweets-timeline
 RUN ls -la
+EXPOSE 8080
 CMD ["./tweets-timeline"]
