@@ -16,6 +16,7 @@ func NewServer(port string, handlers handlers.HandlerDefinition) {
 	app.Use(logger.New())
 	app.Use(cors.New())
 	app.Get("/swagger/*", swagger.HandlerDefault)
+	app.Get("/", handlers.Health)
 	app.Get("/health", handlers.Health)
 
 	apiV1 := app.Group("api/v1")
@@ -23,5 +24,8 @@ func NewServer(port string, handlers handlers.HandlerDefinition) {
 	apiV1.Get("/users/:username", handlers.GetUserByUsername)
 	apiV1.Put("/users/:username", handlers.UpdateUserByUsername)
 
-	app.Listen(":" + port)
+	err := app.Listen(":" + port)
+	if err != nil {
+		panic(err)
+	}
 }
