@@ -33,6 +33,9 @@ build-app-dependencies-in-docker:
 build-app-in-docker:
 	@ docker build --compress --force-rm --rm --tag $(ECR_URI) -f ./build/app/docker/Dockerfile --target tweets-timeline .
 
+build-web-in-docker:
+	@ docker build --compress --force-rm --rm --tag $(ECR_URI)/web -f ./build/web/docker/Dockerfile  .
+
 run-app-in-docker:
 	@ docker run -dti -p $(API_PORT):$(API_PORT) --env-file ./$(ENV).env --name tweets-timeline $(ECR_URI)
 
@@ -46,3 +49,11 @@ aws-ecr-login:
 
 publish-docker-app-on-ecr:
 	@ docker push $(ECR_URI)
+
+prepare-ecs-fargate:
+	@ aws iam --region $(AWS_DEFAULT_REGION) create-role --role-name ecsTaskExecutionRole --assume-role-policy-document ./deployments/ecs/task-execution-assume-role.json
+	@ aws iam --region $(AWS_DEFAULT_REGION) attach-role-policy --role-name ecsTaskExecutionRole --policy-arn arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
+	@ ecs-cli configure --cluster tweets-timeline-cluster-dev --default-launch-type FARGATE --config-name tweets-timeline --region $(AWS_DEFAULT_REGION)
+	@ ecs-cli configure profile --access-key $(AWS_ACCESS_KEY_ID) --secret-key $(AWS_SECRET_ACCESS_KEY) --profile-name dynamo-ecr-wr
+	@ ecs-cli up --cluster-config tweets-timeline-cluster-dev --ecs-profile dynamo-ecr-wr
+	@ aws ec2 describe-security-groups --filters Name=vpc-id,Values=VPC_ID --region $(AWS_DEFAULT_REGION) --profile dynamo-ecr-wr
