@@ -7,6 +7,7 @@ This project has been developed to complete a challenge, nevertheless, it has be
 On the other hand, there are different kinds of tasks that this project can do such as building docker images, starting services using docker-compose, building binaries, deploying on Fargate using AWS copilot, and so on. So for that reason, there are different dependencies required by each task. But also, it's important to highlight that to execute any task, `make` command is used through a `Makefile` file. This is the entry point to centralize all commands not only to test locally each task but also, to use in github actions workflows in order to avoid  duplication of tasks through scripting (check `.github/workflows/app-ci-cd.yml`). But not only is useful to avoid duplication, but also it is useful because when github actions workflows are broken for some unexpected reason, but you can also test locally what happens with the process and solve it with ease.
 
 __Requirements and additional features__
+
 - [X] Get Profile Information - Pull all the information from the database
 - [X] Get Latest N Tweets for Profile
 - [ ] Modify Profile Information
@@ -132,11 +133,13 @@ There are other commands just as experiment focused on automate the process to l
 # Architecture
 
 > Note: the below information does not pretend to be an exhaustive documentation about the architecture and the main concepts, it will only an overview not more, not less.
+
 ## Summary
+
 The API has been developed following the concepts about Port and Adapter architecture and clean architecture.
 ![](./docs/ports-adapters.svg)
 
-
 ## Initialization Life Cycle
+
 ![](./docs/init-flow.svg)
 As you can see above image, there are a well establish life cycle of initialization.
