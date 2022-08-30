@@ -39,6 +39,9 @@ build-web-in-docker:
 run-app-in-docker:
 	@ docker run -dti -p $(API_PORT):$(API_PORT) --env-file ./$(ENV).env --name tweets-timeline $(ECR_URI)
 
+run-web-in-docker:
+	@ docker run -dti -p $(WEB_PORT):$(WEB_PORT) --env-file ./$(ENV).env --name tweets-timeline $(ECR_URI)/web
+
 start-web:
 	@ ENV=$(ENV) npm run --prefix ./web dev
 start-app:
